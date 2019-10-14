@@ -181,14 +181,14 @@ int main()
 
 		for (xx = -1.0; xx <= 1.0; xx += 0.01)
 		{
-			yy = 2 *(cbrt(xx * xx) + sqrt(1 - (xx * xx)));
-			glVertex2f(2*xx, -yy);
+			yy = cbrt(xx * xx) + sqrt(1 - (xx * xx));
+			glVertex2f(2 * xx, 2 * -yy);
 		}
 
 		for (xx = 1.0; xx >= -1.0; xx -= 0.01)
 		{
-			yy = 2 * (cbrt(xx * xx) - sqrt(1 - (xx * xx)));
-			glVertex2f(2 * xx, -yy);
+			yy = cbrt(xx * xx) - sqrt(1 - (xx * xx));
+			glVertex2f(2 * xx, 2 * -yy);
 		}
 		glEnd();
 
