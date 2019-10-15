@@ -152,6 +152,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cviceni4udalosti.cpp" />
+    <ClCompile Include="kresliObjekt.cpp" />
+    <ClCompile Include="nastavGl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="kresliObjekt.h" />
+    <ClInclude Include="nastavGl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

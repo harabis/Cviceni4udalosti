@@ -5,6 +5,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
 #include <math.h>
+#include "nastavGl.h"
+#include "kresliObjekt.h"
+
 
 using namespace std;
 //using namespace sf;
@@ -16,14 +19,14 @@ int main()
 
 	bool jeFull = false;
 
-	//nastaveni OpenGL
+	//objekt nastaveni OpenGL
+	nastavGl nastaveniGL;
 
-	glEnable(GL_TEXTURE_2D);
-	glMatrixMode(GL_PROJECTION);
-	glEnable(GL_DEPTH_TEST);
-	glLoadIdentity();
-	glOrtho(-5, 5, -5, 5, -1, 1);
-	glScalef(1, -1, 1);
+	//objekt pro kresleni
+	kresliObjekt kresli;
+
+
+
 	//glTranslatef(0, 2.5, 0);
 	int oldX = 0, oldY = 0, newY = 0, newX = 0;
 	int mouseX = 0, mouseY = 0;
@@ -46,11 +49,8 @@ int main()
 				Aplikace.close();
 				break;
 			case sf::Event::Resized:
-				glViewport(0, 0, Udalosti.size.width, Udalosti.size.height);
-				glMatrixMode(GL_PROJECTION);
-				glLoadIdentity();
-				glOrtho(-5, 5, -5, 5, -1, 1);
-				glScalef(1, -1, 1);
+				nastaveniGL.zmenaGL(Udalosti.size.width, Udalosti.size.height);
+			
 			case sf::Event::KeyPressed:
 				switch (Udalosti.key.code)
 				{
@@ -66,29 +66,21 @@ int main()
 					case false:
 						Aplikace.create(sf::VideoMode(800, 600), "Cviceni 4 - udalosti", sf::Style::Fullscreen);
 						//glViewport(0, 0, Udalosti.size.width, Udalosti.size.height);
-						glMatrixMode(GL_PROJECTION);
-						glLoadIdentity();
-						glOrtho(-5, 5, -5, 5, -1, 1);
-						glScalef(1, -1, 1);
+						nastaveniGL.obnov();
+
 						jeFull = true;
 						break;
 
 					case true:
 						Aplikace.create(sf::VideoMode(800, 600), "Cviceni 4 - udalosti", sf::Style::Default);
-						glMatrixMode(GL_PROJECTION);
-						glLoadIdentity();
-						glOrtho(-5, 5, -5, 5, -1, 1);
-						glScalef(1, -1, 1);						
+						nastaveniGL.obnov();						
 						jeFull = false;
-						break;
-
-
+						break;						
 					}
 					break;
 
 				}
-
-
+				
 			case sf::Event::MouseButtonPressed:
 				switch (Udalosti.mouseButton.button)
 				{
@@ -157,41 +149,12 @@ int main()
 		
 
 		// kresli kruh
-		int numberofpoints = 100;
-		float perimeter = 4;
-		float x, y;
-		glColor3f(0.0, 1.0, 0.0);
-		glBegin(GL_LINE_LOOP);
-		for (int i = 0; i < numberofpoints; i++) {
-			x = perimeter * cos(i * 2.0 * 3.14159 / (float)numberofpoints);
-			y = perimeter * sin(i * 2.0 * 3.14159 / (float)numberofpoints);
-			glVertex2f((float)x, (float)y);
-		}
-		glEnd();
 
+		kresli.kruh(4, 100);		
 
 		//kresli srdce: y = cbrt(x^2) +- sqrt(1-x^2)
 
-		float xx, yy;
-
-		glColor3f(1.0, 0.0, 0.0);
-		glLineWidth(3.0);
-
-		glBegin(GL_LINE_STRIP);
-
-		for (xx = -1.0; xx <= 1.0; xx += 0.01)
-		{
-			yy = cbrt(xx * xx) + sqrt(1 - (xx * xx));
-			glVertex2f(2 * xx, 2 * -yy);
-		}
-
-		for (xx = 1.0; xx >= -1.0; xx -= 0.01)
-		{
-			yy = cbrt(xx * xx) - sqrt(1 - (xx * xx));
-			glVertex2f(2 * xx, 2 * -yy);
-		}
-		glEnd();
-
+		kresli.srdce();
 
 
 		glFlush();
