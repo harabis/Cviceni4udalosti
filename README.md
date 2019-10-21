@@ -1,12 +1,13 @@
 # Cviceni4udalosti
+
 Cvičení 4 - událostí
 
-Zpracování událostí
+    Zpracování událostí
 
-ESC - zavře program
+    ESC - zavře program
 
-W - přepínání na fullscreen/okno
+    W - přepínání na fullscreen/okno
 
-Levé tlačítko - posun objektu
+    Levé tlačítko - posun objektu
 
-Pravé tlačítko - rotace objektu
+    Pravé tlačítko - rotace objektu
